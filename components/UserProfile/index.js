@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export default function Profile({ session }) {
+export function Profile({ session }) {
 	const [username, setUsername] = useState(null);
 	useEffect(() => {
 		getProfile();
