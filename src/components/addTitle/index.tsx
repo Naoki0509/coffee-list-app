@@ -1,7 +1,7 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Button, IconPlus, IconX } from "@supabase/ui";
 import Image from "next/image";
-import { FC, Fragment, useCallback, useState } from "react";
+import { FC, Fragment, useCallback, useState, VFC } from "react";
 import { client } from "src/lib/supabaseClient";
 import add from "src/public/tailwind.config.png";
 
@@ -27,7 +27,7 @@ export const AddTitle: FC<props> = (props) => {
 
 	const handleAdd = useCallback(
 		async (uuid: string) => {
-			if (title === "") {
+			if (title == "") {
 				alert("タイトルを入力してください");
 				return;
 			}
@@ -47,14 +47,15 @@ export const AddTitle: FC<props> = (props) => {
 	);
 
 	return (
-		<div>
+		<>
 			<div className="p-2 border cursor-pointer" onClick={openModal}>
 				<div className="flex justify-center">
 					<Image src={add} alt="ddd" width={126} height={200} />
 				</div>
 				<div className="mt-2 text-center">ADD NEW</div>
 			</div>
-			<Transition appear={isOpen} as={Fragment} show={true}>
+
+			<Transition appear show={isOpen} as={Fragment}>
 				<Dialog
 					as="div"
 					className="fixed inset-0 z-10 overflow-y-auto"
@@ -85,25 +86,23 @@ export const AddTitle: FC<props> = (props) => {
 								</Dialog.Title>
 								<div className="grid grid-cols-4 gap-2 mt-4 ">
 									<p className=" col-span-1 text-xl text-center">Title</p>
-									{/* <input
+									<input
 										className="w-full h-10 col-span-3 p-2 bg-white border border-gray-300 rounded shadow appearance-none hover:border-gray-700"
 										value={title}
 										onChange={(e) => {
 											return setTitle(e.target.value);
 										}}
-									/> */}
+									/>
 								</div>
 								<div className="grid grid-cols-4 gap-2 mt-4">
 									<p className="col-span-1 text-xl f text-center">Auth or</p>
-									<div>
-										<input
-											className="w-full h-10 col-span-3 p-2 bg-white border border-gray-300 rounded shadow appearance-none hover:border-gray-700"
-											value={author}
-											onChange={(e) => {
-												return setAuthor(e.target.value);
-											}}
-										/>
-									</div>
+									<input
+										className="w-full h-10 col-span-3 p-2 bg-white border border-gray-300 rounded shadow appearance-none hover:border-gray-700"
+										value={author}
+										onChange={(e) => {
+											return setAuthor(e.target.value);
+										}}
+									/>
 								</div>
 								<div className="flex justify-center mt-4">
 									<div className="w-32 p-2">
@@ -133,6 +132,6 @@ export const AddTitle: FC<props> = (props) => {
 					</div>
 				</Dialog>
 			</Transition>
-		</div>
+		</>
 	);
 };
